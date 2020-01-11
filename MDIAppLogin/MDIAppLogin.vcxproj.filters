@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="CAboutDlg.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="CChildFrame.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="CMainFrame.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="MDIAppView.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="MDIAppViewDoc.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="MDIAppViewView.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="CDialogAbout.cpp">
+      <Filter>ModalDialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="CLoginDialog.cpp">
+      <Filter>ModalDialogs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CAboutDlg.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="CChildFrame.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="CMainFrame.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="MDIAppView.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="MDIAppViewDoc.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="MDIAppViewView.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>HPP</Filter>
+    </ClInclude>
+    <ClInclude Include="CDialogAbout.h">
+      <Filter>ModalDialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="CLoginDialog.h">
+      <Filter>ModalDialogs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MDIAppView.ico">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="res\MDIAppViewDoc.ico">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="..\images\screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CPP">
+      <UniqueIdentifier>{36bf8b73-d5f5-44ca-a759-dfd35124ccad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HPP">
+      <UniqueIdentifier>{7407d18d-9aec-49e7-b297-22a4d30ae360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModalDialogs">
+      <UniqueIdentifier>{11062aae-5dd9-491c-b037-2b141670a5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{e3c250bd-a25d-4bc3-8607-ac75099347a8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MDIAppView.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\MDIAppView.rc2">
+      <Filter>Resource</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
+  </ItemGroup>
+</Project>
