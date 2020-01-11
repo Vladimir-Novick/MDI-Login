@@ -1,4 +1,4 @@
-# MDI-Login
+# MDI-Login. Basic skeleton project
 Multiple-Document Interface (MDI) Applications  with Login Modal Dialog
 
  ![login](/images/screen.png)
