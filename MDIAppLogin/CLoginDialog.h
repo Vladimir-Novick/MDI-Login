@@ -2,6 +2,7 @@
 
 #include "StdAfx.h"
 #include "resource.h"
+#include "CBaseDialog.h"
 
 //  ----- Implement Modales dialog
 
@@ -17,7 +18,7 @@ class CLoginDialog : public CWinThread
 
 /////////////////////////////////////////////////////////////////////////////
 
-class CLoginDlg : public CDialog
+class CLoginDlg : public CBaseLoginDialog
 {
 public:
 	CLoginDlg();

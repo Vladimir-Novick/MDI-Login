@@ -28,6 +28,9 @@
     <ClCompile Include="CLoginDialog.cpp">
       <Filter>ModalDialogs</Filter>
     </ClCompile>
+    <ClCompile Include="CBaseLoginDialog.cpp">
+      <Filter>ModalDialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CAboutDlg.h">
@@ -58,6 +61,9 @@
       <Filter>ModalDialogs</Filter>
     </ClInclude>
     <ClInclude Include="CLoginDialog.h">
+      <Filter>ModalDialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaseDialog.h">
       <Filter>ModalDialogs</Filter>
     </ClInclude>
   </ItemGroup>

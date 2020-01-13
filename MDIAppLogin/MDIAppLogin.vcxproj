@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CAboutDlg.cpp" />
+    <ClCompile Include="CBaseLoginDialog.cpp" />
     <ClCompile Include="CChildFrame.cpp" />
     <ClCompile Include="CDialogAbout.cpp" />
     <ClCompile Include="CLoginDialog.cpp" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CAboutDlg.h" />
+    <ClInclude Include="CBaseDialog.h" />
     <ClInclude Include="CChildFrame.h" />
     <ClInclude Include="CDialogAbout.h" />
     <ClInclude Include="CLoginDialog.h" />

@@ -18,7 +18,9 @@ IMPLEMENT_DYNCREATE(CLoginDialog, CWinThread)
 BOOL CLoginDialog::InitInstance()
 {
     CLoginDlg dlg;
+	dlg.SetWaitTime(15); // Set Waiting time - Seconds
     int ret =  dlg.DoModal();
+
 	if (ret != 1) {
 		CWnd * wnd = AfxGetApp()->m_pMainWnd;
 		((CMainFrame*)wnd)->NotLoginExit = true; // lock message 
@@ -30,7 +32,7 @@ BOOL CLoginDialog::InitInstance()
 
 // ----- implement standard modal dialog -----
 
-CLoginDlg::CLoginDlg() : CDialog(CLoginDlg::IDD)
+CLoginDlg::CLoginDlg() : CBaseLoginDialog(CLoginDlg::IDD)
 {
 	//{{AFX_DATA_INIT(CAboutDlg)
 	//}}AFX_DATA_INIT
@@ -38,12 +40,12 @@ CLoginDlg::CLoginDlg() : CDialog(CLoginDlg::IDD)
 
 void CLoginDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
+	CBaseLoginDialog::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CAboutDlg)
 	//}}AFX_DATA_MAP
 }
 
-BEGIN_MESSAGE_MAP(CLoginDlg, CDialog)
+BEGIN_MESSAGE_MAP(CLoginDlg, CBaseLoginDialog)
 	//{{AFX_MSG_MAP(CAboutDlg)
 		// No message handlers
 	//}}AFX_MSG_MAP
@@ -54,7 +56,7 @@ END_MESSAGE_MAP()
 
 void CLoginDlg::OnBnClickedCancel()
 {
-	CDialog::OnCancel();
+	CBaseLoginDialog::OnCancel();
 }
 
 
@@ -62,3 +64,4 @@ void CLoginDlg::OnBnClickedOk()
 {
 	EndDialog(1);  // OK
 }
+
