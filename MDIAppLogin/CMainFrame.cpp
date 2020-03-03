@@ -19,6 +19,8 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 #define DEBUG_NEW new
 #endif
 
+const UINT WM_PAINTMYCAPTION = WM_USER + 5;
+
 /////////////////////////////////////////////////////////////////////////////
 // CMainFrame
 
@@ -32,6 +34,9 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 	//}}AFX_MSG_MAP
 	ON_WM_SHOWWINDOW()
 	ON_WM_CLOSE()
+	ON_WM_ERASEBKGND()
+	ON_WM_ERASEBKGND()
+	ON_MESSAGE(WM_PAINTMYCAPTION, OnPaintMyCaption)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -55,6 +60,22 @@ CMainFrame::~CMainFrame()
 {
 }
 
+#pragma region updateTitle ---
+
+void CMainFrame::OnUpdateFrameTitle(BOOL bAddToTitle)
+{
+	m_capp.UpdateFrameTitle(m_hWnd, m_strTitle);
+}
+
+
+LRESULT CMainFrame::OnPaintMyCaption(WPARAM bActive, LPARAM lParam)
+{
+	m_capp.PaintMyCaption(bActive, lParam, m_strTitle);
+	return 0;
+}
+
+#pragma endregion 
+
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CMDIFrameWnd::OnCreate(lpCreateStruct) == -1)
@@ -67,6 +88,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TRACE0("Failed to create toolbar\n");
 		return -1;      // fail to create
 	}
+
+
+	m_capp.Install(this, WM_PAINTMYCAPTION);
 
 	if (!m_wndStatusBar.Create(this) ||
 		!m_wndStatusBar.SetIndicators(indicators,
@@ -145,3 +169,18 @@ void CMainFrame::OnClose()
 	}
 
 }
+
+
+BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
+{
+	if (CMDIFrameWnd::OnCreateClient(lpcs, pContext))
+	{
+		m_Client.SubclassWindow(m_hWndMDIClient);
+		return TRUE;
+	}
+
+	return CMDIFrameWnd::OnCreateClient(lpcs, pContext);
+}
+
+
+

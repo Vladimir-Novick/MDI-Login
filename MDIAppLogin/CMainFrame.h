@@ -1,6 +1,9 @@
 
 #pragma once
 
+#include "ClientWnd.h"
+#include "PaintCap.h"
+
 
 class CMainFrame : public CMDIFrameWnd
 {
@@ -32,6 +35,16 @@ public:
 protected:  // control bar embedded members
 	CStatusBar  m_wndStatusBar;
 	CToolBar    m_wndToolBar;
+	CClientWnd  m_Client; // Custom frame color
+
+#pragma region updateTitle ---
+
+	virtual void OnUpdateFrameTitle(BOOL bAddToTitle);
+	LRESULT OnPaintMyCaption(WPARAM wp, LPARAM lp);
+	// caption bar member and message handler
+	CCaptionPainter m_capp;
+
+#pragma endregion
 
 // Generated message map functions
 protected:
@@ -44,6 +57,7 @@ protected:
 public:
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 	afx_msg void OnClose();
+	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
 };
 
 /////////////////////////////////////////////////////////////////////////////

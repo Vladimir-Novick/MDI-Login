@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\Debug\MDIAppView.pch</PrecompiledHeaderOutputFile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ObjectFileName>.\Debug\</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
@@ -136,17 +136,20 @@
     <ClCompile Include="CBaseLoginDialog.cpp" />
     <ClCompile Include="CChildFrame.cpp" />
     <ClCompile Include="CDialogAbout.cpp" />
+    <ClCompile Include="ClientWnd.cpp" />
     <ClCompile Include="CLoginDialog.cpp" />
     <ClCompile Include="CMainFrame.cpp" />
     <ClCompile Include="MDIAppView.cpp" />
     <ClCompile Include="MDIAppViewDoc.cpp" />
     <ClCompile Include="MDIAppViewView.cpp" />
+    <ClCompile Include="PaintCap.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Subclass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MDIAppView.rc" />
@@ -156,13 +159,16 @@
     <ClInclude Include="CBaseDialog.h" />
     <ClInclude Include="CChildFrame.h" />
     <ClInclude Include="CDialogAbout.h" />
+    <ClInclude Include="ClientWnd.h" />
     <ClInclude Include="CLoginDialog.h" />
     <ClInclude Include="CMainFrame.h" />
     <ClInclude Include="MDIAppView.h" />
     <ClInclude Include="MDIAppViewDoc.h" />
     <ClInclude Include="MDIAppViewView.h" />
+    <ClInclude Include="PaintCap.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="Subclass.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\images\screen.png" />
