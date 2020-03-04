@@ -35,7 +35,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 	ON_WM_SHOWWINDOW()
 	ON_WM_CLOSE()
 	ON_WM_ERASEBKGND()
-	ON_WM_ERASEBKGND()
 	ON_MESSAGE(WM_PAINTMYCAPTION, OnPaintMyCaption)
 END_MESSAGE_MAP()
 
@@ -89,6 +88,11 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // fail to create
 	}
 
+#pragma region custom close button
+
+	ModifyStyle(WS_SYSMENU, 0); // Remove standard system menu
+
+#pragma endregion
 
 	m_capp.Install(this, WM_PAINTMYCAPTION);
 
@@ -116,6 +120,8 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
+
+
 
 	return TRUE;
 }

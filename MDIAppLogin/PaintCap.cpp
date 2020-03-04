@@ -37,11 +37,11 @@ CCaptionPainter::~CCaptionPainter()
 // Install caption handler. nPaintMsg is message I will send too frame
 // when its caption needs painting.
 //
-BOOL CCaptionPainter::Install(CFrameWnd* pFrameWnd,UINT nPaintMsg,BOOL bMod)
+BOOL CCaptionPainter::Install(CFrameWnd* pFrameWnd, UINT nPaintMsg, BOOL bMod)
 {
 	ASSERT_KINDOF(CFrameWnd, pFrameWnd);
 	m_nPaintMsg = nPaintMsg;
-	m_bModified=bMod;
+	m_bModified = bMod;
 	return HookWindow(pFrameWnd);
 }
 
@@ -50,7 +50,55 @@ BOOL CCaptionPainter::Install(CFrameWnd* pFrameWnd,UINT nPaintMsg,BOOL bMod)
 //
 LRESULT CCaptionPainter::WindowProc(UINT msg, WPARAM wp, LPARAM lp)
 {
+	int xPos;
+	int yPos;
+	RECT client;
+	LRESULT res;
+	CWnd& wnd = *m_pWndHooked;
+	DWORD style;
+	GetWindowRect(wnd.m_hWnd, &client);
+	POINT pt;
 	switch (msg) {
+	case WM_NCLBUTTONDOWN:
+
+		pt.x = GET_X_LPARAM(lp) - client.left;
+		pt.y = GET_Y_LPARAM(lp) - client.top;
+
+		if (PtInRect(&m_rcCloseButton, pt)) {
+			res = ::SendMessage(wnd.m_hWnd, WM_CLOSE, NULL, NULL);
+			return 0;
+		}
+
+		if (PtInRect(&m_rcMaxButton, pt)) {
+			style = wnd.GetStyle();
+			if (style & WS_MAXIMIZE) {
+				ShowWindow(wnd.m_hWnd, SW_NORMAL);
+			}
+			else {
+				ShowWindow(wnd.m_hWnd, SW_MAXIMIZE);
+			}
+			return 0;
+		}
+
+
+		if (PtInRect(&m_rcMinButton, pt)) {
+			ShowWindow(wnd.m_hWnd, SW_MINIMIZE);
+			return 0;
+		}
+
+		break;
+	case WM_NCMOUSEMOVE:
+		pt.x = GET_X_LPARAM(lp) - client.left;
+		pt.y = GET_Y_LPARAM(lp) - client.top;
+		break;
+	case WM_NCMOUSEHOVER:
+		pt.x = GET_X_LPARAM(lp) - client.left;
+		pt.y = GET_Y_LPARAM(lp) - client.top;
+		break;
+	case WM_NCMOUSELEAVE:
+		pt.x = GET_X_LPARAM(lp) - client.left;
+		pt.y = GET_Y_LPARAM(lp) - client.top;
+		break;
 	case WM_NCPAINT:
 		OnNcPaint(HRGN(wp));
 		return 0;
@@ -92,11 +140,12 @@ void CCaptionPainter::OnNcPaint(HRGN hRgn)
 	// Exclude caption from update region
 	//
 	HRGN hRgnCaption = ::CreateRectRgnIndirect(&rc);
-	HRGN hRgnNew     = ::CreateRectRgnIndirect(&rc);
+	HRGN hRgnNew = ::CreateRectRgnIndirect(&rc);
 	if ((WORD)hRgn > 1) {
 		// wParam is a valid region: subtract caption from it
 		::CombineRgn(hRgnNew, hRgn, hRgnCaption, RGN_DIFF);
-	} else {
+	}
+	else {
 		// wParam is not a valid region: create one that's the whole
 		// window minus the caption bar
 		HRGN hRgnAll = ::CreateRectRgnIndirect(&rcWin);
@@ -131,7 +180,7 @@ BOOL CCaptionPainter::OnNcActivate(BOOL bActive)
 		bActive = TRUE;
 	if (!frame.IsWindowEnabled())			// but not if disabled
 		bActive = FALSE;
-	if (bActive==m_bActive)
+	if (bActive == m_bActive)
 		return TRUE;					// nothing to do
 
 	// In case this is a MDI app, manually activate/paint active MDI child
@@ -139,8 +188,8 @@ BOOL CCaptionPainter::OnNcActivate(BOOL bActive)
 	// Must do this BEFORE calling Default, or it will not work.
 	//
 	CFrameWnd* pActiveFrame = frame.GetActiveFrame();
-	if (pActiveFrame!=&frame) {
-		pActiveFrame->SendMessage(WM_NCACTIVATE,bActive);
+	if (pActiveFrame != &frame) {
+		pActiveFrame->SendMessage(WM_NCACTIVATE, bActive);
 		pActiveFrame->SendMessage(WM_NCPAINT);
 	}
 
@@ -149,7 +198,7 @@ BOOL CCaptionPainter::OnNcActivate(BOOL bActive)
 	//
 	DWORD dwStyle = frame.GetStyle();
 	if (dwStyle & WS_VISIBLE)
-		::SetWindowLong(frame, GWL_STYLE, (dwStyle & ~ WS_VISIBLE));
+		::SetWindowLong(frame, GWL_STYLE, (dwStyle & ~WS_VISIBLE));
 
 	MSG& msg = AfxGetThreadState()->m_lastSentMsg;
 	msg.wParam = bActive;
@@ -178,7 +227,7 @@ void CCaptionPainter::OnSetText(LPCTSTR lpText)
 	//
 	DWORD dwStyle = wnd.GetStyle();
 	if (dwStyle & WS_VISIBLE)
-		SetWindowLong(wnd.m_hWnd, GWL_STYLE, dwStyle & ~ WS_VISIBLE);
+		SetWindowLong(wnd.m_hWnd, GWL_STYLE, dwStyle & ~WS_VISIBLE);
 	Default();
 	if (dwStyle & WS_VISIBLE)
 		SetWindowLong(wnd.m_hWnd, GWL_STYLE, dwStyle);
@@ -212,7 +261,7 @@ void CCaptionPainter::PaintCaption()
 	}
 
 	// Get active/inactive bitmap & determine if needs to be regenerated
-	CBitmap& bm = m_bmCaption[m_bActive!=0];	// get bitmap
+	CBitmap& bm = m_bmCaption[m_bActive != 0];	// get bitmap
 	BOOL bPaintIt = FALSE;							// paint anew?
 	if (!(HBITMAP)bm) {											// no bitmap:
 		bm.CreateCompatibleBitmap(&dcWin, rc.Width(), rc.Height()); // create one
@@ -225,15 +274,15 @@ void CCaptionPainter::PaintCaption()
 		PAINTCAP pc;
 		pc.m_pDC = &dc;
 		pc.m_szCaption = rc.Size();
-    pc.m_bActive=m_bActive;
-    if(m_nPaintMsg)
-		  wnd.SendMessage(m_nPaintMsg, m_bActive, (LPARAM)&pc);
-    else 
-      DrawNormalCaption(pc);
+		pc.m_bActive = m_bActive;
+		if (m_nPaintMsg)
+			wnd.SendMessage(m_nPaintMsg, m_bActive, (LPARAM)&pc);
+		else
+			DrawNormalCaption(pc);
 	}
 
 	// blast bits to screen
-	dcWin.BitBlt(rc.left,rc.top,rc.Width(),rc.Height(),&dc,0,0,SRCCOPY);
+	dcWin.BitBlt(rc.left, rc.top, rc.Width(), rc.Height(), &dc, 0, 0, SRCCOPY);
 	dc.SelectObject(pOldBitmap); // restore DC
 }
 
@@ -241,11 +290,11 @@ void CCaptionPainter::DrawNormalCaption(const PAINTCAP& pc)
 {
 	ASSERT(m_pWndHooked);
 	CWnd& wnd = *m_pWndHooked;
-  UINT uFlags = DC_TEXT|DC_ICON;
-  if(pc.m_bActive)uFlags|=DC_ACTIVE;
-  CRect rc(CPoint(0,0),pc.m_szCaption);
-  ::DrawCaption(wnd,*pc.m_pDC,&rc,uFlags);
-  DrawButtons(pc);
+	UINT uFlags = DC_TEXT | DC_ICON;
+	if (pc.m_bActive)uFlags |= DC_ACTIVE;
+	CRect rc(CPoint(0, 0), pc.m_szCaption);
+	::DrawCaption(wnd, *pc.m_pDC, &rc, uFlags);
+	DrawButtons(pc);
 }
 ////////////////
 // Draw caption icon. Returns width of icon.
@@ -258,10 +307,10 @@ int CCaptionPainter::DrawIcon(const PAINTCAP& pc)
 	//
 	int cxIcon = GetSystemMetrics(SM_CXSIZE);
 	CRect rc(0, 0, cxIcon, GetSystemMetrics(SM_CYSIZE));
-	rc.DeflateRect(0,2);
+	rc.DeflateRect(0, 2);
 	rc.left += 2;
 	auto hicon = (HICON)GetClassLong(wnd.m_hWnd, GCL_HICONSM);
-	DrawIconEx(pc.m_pDC->m_hDC,  rc.left, rc.top,
+	DrawIconEx(pc.m_pDC->m_hDC, rc.left, rc.top,
 		hicon,
 		rc.Width(), rc.Height(), 0, NULL, DI_NORMAL);
 	return cxIcon;
@@ -274,44 +323,98 @@ int CCaptionPainter::DrawIcon(const PAINTCAP& pc)
 int CCaptionPainter::DrawButtons(const PAINTCAP& pc)
 {
 	ASSERT(m_pWndHooked);
+
 	CWnd& wnd = *m_pWndHooked;
 	DWORD dwStyle = wnd.GetStyle();
 	if (!(dwStyle & WS_CAPTION))
 		return 0;
 
+
 	ASSERT(pc.m_pDC);
-	CDC& dc = *pc.m_pDC;
 
-	int cxIcon = GetSystemMetrics(SM_CXSIZE);
-	int cyIcon = GetSystemMetrics(SM_CYSIZE);
 
-	// Draw caption buttons. These are all drawn inside a rectangle
-	// of dimensions SM_CXSIZE by SM_CYSIZE
-	CRect rc(GetSystemMetrics(SM_CYBORDER), 0, cxIcon, cyIcon);
-	rc += CPoint(pc.m_szCaption.cx-cxIcon, 0);	// move right
+	m_cxIcon = GetSystemMetrics(SM_CXSIZE);
+	m_cyIcon = GetSystemMetrics(SM_CYSIZE);
+	MakeCloseButton(pc);
+	MakeMaxButton(pc);
+	MakeMinButtin(pc);
 
-	// Close box has a 2 pixel border on all sides but left, which is zero
-	rc.DeflateRect(0,2);
-	rc.right -= 2;
-	dc.DrawFrameControl(&rc, DFC_CAPTION, DFCS_CAPTIONCLOSE);
-
-	// Max/restore button is like close box; just shift rectangle left
-	// Also does help button, if any.
+	CRect rc(GetSystemMetrics(SM_CYBORDER), 0, m_cxIcon, m_cyIcon);
+	rc += CPoint(pc.m_szCaption.cx - m_cxIcon, 0);	// move right
 	BOOL bMaxBox = dwStyle & WS_MAXIMIZEBOX;
 	if (bMaxBox || (wnd.GetExStyle() & WS_EX_CONTEXTHELP)) {
-		rc -= CPoint(cxIcon, 0);
-		dc.DrawFrameControl(&rc, DFC_CAPTION,
-			bMaxBox ? (wnd.IsZoomed() ? DFCS_CAPTIONRESTORE : DFCS_CAPTIONMAX) :
-				DFCS_CAPTIONHELP);
+		rc -= CPoint(m_cxIcon, 0);
+	}
+	if (dwStyle & WS_MINIMIZEBOX) {
+		rc -= CPoint(m_cxIcon - 2, 0);
 	}
 
-	// Minimize button has 2 pixel border on all sides but right.
-	if (dwStyle & WS_MINIMIZEBOX) {
-		rc -= CPoint(cxIcon-2,0);
-		dc.DrawFrameControl(&rc, DFC_CAPTION, DFCS_CAPTIONMIN);
-	}
 	return pc.m_szCaption.cx - rc.left - 2;
-	return 0;
+
+}
+
+void CCaptionPainter::MakeMinButtin(const PAINTCAP& pc)
+{
+	{
+		CDC& dc = *pc.m_pDC;
+		CWnd& wnd = *m_pWndHooked;
+		DWORD dwStyle = wnd.GetStyle();
+		// Minimize button has 2 pixel border on all sides but right.
+		CRect rc(GetSystemMetrics(SM_CYBORDER), 0, m_cxIcon, m_cyIcon);
+		rc += CPoint(pc.m_szCaption.cx - m_cxIcon, 0);	// move right
+		rc.DeflateRect(0, 2);
+		rc.right -= 2;
+		BOOL bMaxBox = dwStyle & WS_MAXIMIZEBOX;
+		if (bMaxBox || (wnd.GetExStyle() & WS_EX_CONTEXTHELP)) {
+			rc -= CPoint(m_cxIcon, 0);
+
+			if (dwStyle & WS_MINIMIZEBOX) {
+				rc -= CPoint(m_cxIcon - 2, 0);
+				dc.DrawFrameControl(&rc, DFC_CAPTION, DFCS_CAPTIONMIN | DFCS_FLAT);
+				m_rcMinButton = rc;
+			}
+		}
+	}
+}
+
+void CCaptionPainter::MakeMaxButton(const PAINTCAP& pc)
+{
+	{
+		CDC& dc = *pc.m_pDC;
+		CWnd& wnd = *m_pWndHooked;
+		DWORD dwStyle = wnd.GetStyle();
+		// Max/restore button is like close box; just shift rectangle left
+		// Also does help button, if any.
+		CRect rc(GetSystemMetrics(SM_CYBORDER), 0, m_cxIcon, m_cyIcon);
+		rc += CPoint(pc.m_szCaption.cx - m_cxIcon, 0);	// move right
+		rc.DeflateRect(0, 2);
+		rc.right -= 2;
+		BOOL bMaxBox = dwStyle & WS_MAXIMIZEBOX;
+		if (bMaxBox || (wnd.GetExStyle() & WS_EX_CONTEXTHELP)) {
+			rc -= CPoint(m_cxIcon, 0);
+			dc.DrawFrameControl(&rc, DFC_CAPTION,
+				bMaxBox ? (wnd.IsZoomed() ? DFCS_CAPTIONRESTORE | DFCS_FLAT : DFCS_CAPTIONMAX  | DFCS_FLAT) :
+				DFCS_CAPTIONHELP);
+			m_rcMaxButton = rc;
+		}
+	}
+}
+
+void CCaptionPainter::MakeCloseButton(const PAINTCAP& pc)
+{
+	{
+		CDC& dc = *pc.m_pDC;
+		// Draw caption buttons. These are all drawn inside a rectangle
+		// of dimensions SM_CXSIZE by SM_CYSIZE
+		CRect rc(GetSystemMetrics(SM_CYBORDER), 0, m_cxIcon, m_cyIcon);
+		rc += CPoint(pc.m_szCaption.cx - m_cxIcon, 0);	// move right
+
+		// Close box has a 2 pixel border on all sides but left, which is zero
+		rc.DeflateRect(0, 2);
+		rc.right -= 2;
+		dc.DrawFrameControl(&rc, DFC_CAPTION , DFCS_CAPTIONCLOSE| DFCS_FLAT);
+		m_rcCloseButton = rc;
+	}
 }
 
 //////////////////
@@ -323,20 +426,20 @@ CCaptionRect::CCaptionRect(const CWnd& wnd)
 	DWORD dwStyle = wnd.GetStyle();
 	CSize szFrame = (dwStyle & WS_THICKFRAME) ?
 		CSize(GetSystemMetrics(SM_CXSIZEFRAME),
-			   GetSystemMetrics(SM_CYSIZEFRAME)) :
+			GetSystemMetrics(SM_CYSIZEFRAME)) :
 		CSize(GetSystemMetrics(SM_CXFIXEDFRAME),
-				GetSystemMetrics(SM_CYFIXEDFRAME));
+			GetSystemMetrics(SM_CYFIXEDFRAME));
 
 	int cxIcon = GetSystemMetrics(SM_CXSIZE); // width of caption icon/button
 
 	// Compute rectangle
 	wnd.GetWindowRect(this);		// window rect in screen coords
 	*this -= CPoint(left, top);	// shift origin to (0,0)
-	left  += szFrame.cx;				// frame
+	left += szFrame.cx;				// frame
 	right -= szFrame.cx;				// frame
-	top   += szFrame.cy;				// top = end of frame
+	top += szFrame.cy;				// top = end of frame
 	bottom = top + GetSystemMetrics(SM_CYCAPTION) // height of caption
-		+ GetSystemMetrics(SM_CYBORDER)*2;				  // minus gray shadow border
+		+ GetSystemMetrics(SM_CYBORDER) * 2;				  // minus gray shadow border
 }
 
 //////////////////
@@ -352,9 +455,9 @@ int CCaptionPainter::GetLuminosity(COLORREF color)
 	int r = GetRValue(color);
 	int g = GetGValue(color);
 	int b = GetBValue(color);
-	int rgbMax = max( max(r,g), b);
-	int rgbMin = min( min(r,g), b);
-	return (((rgbMax+rgbMin) * HLSMAX) + RGBMAX ) / (2*RGBMAX);
+	int rgbMax = max(max(r, g), b);
+	int rgbMin = min(min(r, g), b);
+	return (((rgbMax + rgbMin) * HLSMAX) + RGBMAX) / (2 * RGBMAX);
 }
 
 #define COLOR_WHITE RGB(255,255,255)
@@ -400,50 +503,50 @@ void CCaptionPainter::PaintMyCaption(WPARAM bActive, LPARAM lParam, CString m_st
 	// Modify them to suit your needs.
 	if (bActive) {
 		// Active caption
-		clrFrom	= RGB(193, 200, 215);
-		clrTo	= RGB(82, 99, 140);
+		clrFrom = RGB(193, 200, 215);
+		clrTo = RGB(82, 99, 140);
 	}
 	else
 	{
 		// Inactive caption
-		clrFrom	= GetSysColor(COLOR_INACTIVECAPTION);
-		clrTo	= RGB(184, 180, 184);
+		clrFrom = GetSysColor(COLOR_INACTIVECAPTION);
+		clrTo = RGB(184, 180, 184);
 	}
 
 	// Get the intensity values for the ending color
 	int r1 = GetRValue(clrTo); // red
 	int g1 = GetGValue(clrTo); // green
 	int b1 = GetBValue(clrTo); // blue
-	
+
 	// Get the intensity values for the begining color
 	int r2 = GetRValue(clrFrom); // red
 	int g2 = GetGValue(clrFrom); // green
 	int b2 = GetBValue(clrFrom); // blue
 
-	int x = 5*cxCap/6;					// start 5/6 of the way right
+	int x = 5 * cxCap / 6;					// start 5/6 of the way right
 	int w = x;							// width of area to shade
-	int xDelta= max(w/NCOLORSHADES,1);	// width of one shade band
+	int xDelta = max(w / NCOLORSHADES, 1);	// width of one shade band
 
 	// Paint far right 1/6 of caption the background color
-	PaintRect(dc, x, 0, cxCap-x, cyCap, clrTo);
+	PaintRect(dc, x, 0, cxCap - x, cyCap, clrTo);
 
 	int r, g, b;
 	while (x > xDelta) {
 		x -= xDelta;
 		if (r1 > r2)
-			r = r1 - (r1-r2)*(w-x)/w;
+			r = r1 - (r1 - r2) * (w - x) / w;
 		else
-			r = r1 + (r2-r1)*(w-x)/w;
+			r = r1 + (r2 - r1) * (w - x) / w;
 
 		if (g1 > g2)
-			g = g1 - (g1-g2)*(w-x)/w;
+			g = g1 - (g1 - g2) * (w - x) / w;
 		else
-			g = g1 + (g2-g1)*(w-x)/w;
+			g = g1 + (g2 - g1) * (w - x) / w;
 
 		if (b1 > b2)
-			b = b1 - (b1-b2)*(w-x)/w;
+			b = b1 - (b1 - b2) * (w - x) / w;
 		else
-			b = b1 + (b2-b1)*(w-x)/w;
+			b = b1 + (b2 - b1) * (w - x) / w;
 
 		// Paint bands right to left
 		PaintRect(dc, x, 0, xDelta, cyCap, RGB(r, g, b));
@@ -453,29 +556,29 @@ void CCaptionPainter::PaintMyCaption(WPARAM bActive, LPARAM lParam, CString m_st
 	PaintRect(dc, 0, 0, x, cyCap, clrFrom);
 
 	// Use caption painter to draw icon and buttons
-	int cxIcon  = DrawIcon(pc);
+	int cxIcon = DrawIcon(pc);
 	int cxButns = DrawButtons(pc);
 
 	// Now draw text. First Create fonts if needed
 	if (!m_fontCaption.m_hObject)
 		CreateFonts();
 
-	CString dt=GetDocTitle();
+	CString dt = GetDocTitle();
 	CString s;
 
 	// app title
-	if(dt.IsEmpty()) s = " " + m_strTitle;
+	if (dt.IsEmpty()) s = " " + m_strTitle;
 	else s = " " + m_strTitle + "  -  [" + dt + "]";
 
-	CRect rc(CPoint(0,0), pc.m_szCaption); // text rectangle
-	rc.left  += cxIcon+2;		// start after icon
+	CRect rc(CPoint(0, 0), pc.m_szCaption); // text rectangle
+	rc.left += cxIcon + 2;		// start after icon
 	rc.right -= cxButns;		// don't draw past buttons
 	dc.SetBkMode(TRANSPARENT);	// draw on top of our shading
 
 	// This is a trial and error value that sets the point
 	// where the caption background is too light/dark in
 	// order to display the text with white/black.
-	#define	LUMINOSITY_MARK 120
+#define	LUMINOSITY_MARK 120
 
 	if (GetLuminosity(clrFrom) > LUMINOSITY_MARK)
 		dc.SetTextColor(COLOR_BLACK);
@@ -483,7 +586,7 @@ void CCaptionPainter::PaintMyCaption(WPARAM bActive, LPARAM lParam, CString m_st
 		dc.SetTextColor(COLOR_WHITE);
 
 	CFont* pOldFont = dc.SelectObject(&m_fontCaption);
-	dc.DrawText(s, &rc, DT_LEFT|DT_VCENTER|DT_SINGLELINE|DT_END_ELLIPSIS);
+	dc.DrawText(s, &rc, DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_END_ELLIPSIS);
 
 	// Restore DC
 	dc.SelectObject(pOldFont);
@@ -508,8 +611,8 @@ extern void AFXAPI AfxSetWindowText(HWND, LPCTSTR);
 
 void CCaptionPainter::UpdateFrameTitle(HWND m_hWnd, CString m_strTitle)
 {
-  CString s = (m_strTitle + " " + GetDocTitle());
-	AfxSetWindowText(m_hWnd,(LPCTSTR)s);
+	CString s = (m_strTitle + " " + GetDocTitle());
+	AfxSetWindowText(m_hWnd, (LPCTSTR)s);
 }
 
 //////////////////
@@ -518,21 +621,21 @@ void CCaptionPainter::UpdateFrameTitle(HWND m_hWnd, CString m_strTitle)
 CString  CCaptionPainter::GetDocTitle()
 {
 	static CString s;
-  s.Empty();
-	CFrameWnd *mFrame = (CFrameWnd *)AfxGetMainWnd();
-  if(mFrame){
-  	CFrameWnd *pFrame = mFrame->GetActiveFrame();
-    if(pFrame!=mFrame && pFrame){
-      pFrame->GetWindowText(s);
-      if(!s.IsEmpty()){
-        if(m_bModified){
-        	CDocument *pDoc = pFrame->GetActiveDocument();
-          if(pDoc){
-            if(pDoc->IsModified()&&s.GetAt(s.GetLength()-1)!='*')s+="*";
-          }
-        }
-      }
-    }
-  }
-  return s;
+	s.Empty();
+	CFrameWnd* mFrame = (CFrameWnd*)AfxGetMainWnd();
+	if (mFrame) {
+		CFrameWnd* pFrame = mFrame->GetActiveFrame();
+		if (pFrame != mFrame && pFrame) {
+			pFrame->GetWindowText(s);
+			if (!s.IsEmpty()) {
+				if (m_bModified) {
+					CDocument* pDoc = pFrame->GetActiveDocument();
+					if (pDoc) {
+						if (pDoc->IsModified() && s.GetAt(s.GetLength() - 1) != '*')s += "*";
+					}
+				}
+			}
+		}
+	}
+	return s;
 }

@@ -56,6 +56,14 @@ protected:
 	// Helper
 	void PaintCaption();
 
+	int m_cxIcon ;
+	int m_cyIcon ;
+	CRect m_rcCloseButton;
+	CRect m_rcMaxButton;
+	CRect m_rcMinButton;
+
+	
+
 	// These are similar to, but NOT the same as the equivalent CWnd fns. Don't
 	// override unless you're a guru, and even THEN I wouldn't recommend it.
 	virtual LRESULT WindowProc(UINT msg, WPARAM wp, LPARAM lp);	
@@ -70,6 +78,9 @@ public:
 	BOOL Install(CFrameWnd* pFrameWnd, UINT nPaintMsg=0, BOOL bMod=FALSE);
 	int  DrawIcon(const PAINTCAP& pc);
 	int  DrawButtons(const PAINTCAP& pc);
+	void MakeMinButtin(const PAINTCAP& pc);
+	void MakeMaxButton(const PAINTCAP& pc);
+	void MakeCloseButton(const PAINTCAP& pc);
 	void Invalidate() { m_szCaption=CSize(0,0); }
 	static int GetLuminosity(COLORREF color);
 	static void PaintRect(CDC& dc, int x, int y, int w, int h, COLORREF color);
