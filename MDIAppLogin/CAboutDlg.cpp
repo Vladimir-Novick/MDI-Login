@@ -1,5 +1,7 @@
 #include "stdafx.h"
+#include "afxwin.h"
 #include "CAboutDlg.h"
+#include "CDesignDialog.h"
 
 #ifdef _DEBUG
 #undef DEBUG_NEW
@@ -17,21 +19,21 @@ CAboutDlg::~CAboutDlg() {
 	// TODO: add delete member here
 }
 
-CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
+CAboutDlg::CAboutDlg() : CDesignDialog(CAboutDlg::IDD)
 {
-	//{{AFX_DATA_INIT(CAboutDlg)
+	//{{AFX_DATA_INIT(CCustomDialog)
 	//}}AFX_DATA_INIT
 }
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CAboutDlg)
+	//{{AFX_DATA_MAP(CCustomDialog)
 	//}}AFX_DATA_MAP
 }
 
-BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
-	//{{AFX_MSG_MAP(CAboutDlg)
+BEGIN_MESSAGE_MAP(CAboutDlg, CDesignDialog)
+	//{{AFX_MSG_MAP(CCustomDialog)
 		// No message handlers
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()

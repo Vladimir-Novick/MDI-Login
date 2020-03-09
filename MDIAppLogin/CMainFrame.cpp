@@ -63,13 +63,15 @@ CMainFrame::~CMainFrame()
 
 void CMainFrame::OnUpdateFrameTitle(BOOL bAddToTitle)
 {
-	m_capp.UpdateFrameTitle(m_hWnd, m_strTitle);
+	if (m_capp != NULL )
+	   m_capp->UpdateFrameTitle(m_hWnd, m_strTitle);
 }
 
 
 LRESULT CMainFrame::OnPaintMyCaption(WPARAM bActive, LPARAM lParam)
 {
-	m_capp.PaintMyCaption(bActive, lParam, m_strTitle);
+	if (m_capp != NULL)
+	    m_capp->PaintMyCaption(bActive, lParam, m_strTitle);
 	return 0;
 }
 
@@ -93,8 +95,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	ModifyStyle(WS_SYSMENU, 0); // Remove standard system menu
 
 #pragma endregion
-
-	m_capp.Install(this, WM_PAINTMYCAPTION);
+	m_capp = new CCaptionPainter();
+	m_capp->Install(this, WM_PAINTMYCAPTION);
 
 	if (!m_wndStatusBar.Create(this) ||
 		!m_wndStatusBar.SetIndicators(indicators,
@@ -164,12 +166,18 @@ void CMainFrame::OnShowWindow(BOOL bShow, UINT nStatus)
 void CMainFrame::OnClose()
 {
 	if (NotLoginExit) {
+		m_capp->Uninstall();
+		delete m_capp;
+		m_Client.UnsubclassWindow();
 		CMDIFrameWnd::OnClose();  //  close message from login screen
 	}
 	else {
 		
 		if (AfxMessageBox("Are you Sure to quit?", MB_YESNO | MB_ICONQUESTION) == IDYES)
 		{
+			m_capp->Uninstall();
+			delete m_capp;
+			m_Client.UnsubclassWindow();
 			CMDIFrameWnd::OnClose();
 		}
 	}

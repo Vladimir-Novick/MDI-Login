@@ -3,6 +3,8 @@
 // If this program works, it was written by Paul DiLascia.
 // If not, I don't know who wrote it.
 //
+// Modified: 2020.o3.05 Vladimir Novick.
+//
 #include "stdafx.h"
 #include "PaintCap.h"
 
@@ -45,17 +47,26 @@ BOOL CCaptionPainter::Install(CFrameWnd* pFrameWnd, UINT nPaintMsg, BOOL bMod)
 	return HookWindow(pFrameWnd);
 }
 
+/// <summary>
+/// Uninstalls this instance.
+/// </summary>
+void CCaptionPainter::Uninstall()
+{
+	m_nPaintMsg = NULL;
+	m_bModified = NULL;
+	HookWindow(NULL);
+}
+
 //////////////////
 // Message handler handles caption-related messages
 //
 LRESULT CCaptionPainter::WindowProc(UINT msg, WPARAM wp, LPARAM lp)
 {
-	int xPos;
-	int yPos;
 	RECT client;
 	LRESULT res;
 	CWnd& wnd = *m_pWndHooked;
 	DWORD style;
+	CFrameWnd* frame;
 	GetWindowRect(wnd.m_hWnd, &client);
 	POINT pt;
 	switch (msg) {
@@ -65,8 +76,10 @@ LRESULT CCaptionPainter::WindowProc(UINT msg, WPARAM wp, LPARAM lp)
 		pt.y = GET_Y_LPARAM(lp) - client.top;
 
 		if (PtInRect(&m_rcCloseButton, pt)) {
-			res = ::SendMessage(wnd.m_hWnd, WM_CLOSE, NULL, NULL);
-			return 0;
+			frame = ((CFrameWnd*)m_pWndHooked);
+
+			res = frame->SendMessage(WM_CLOSE, NULL, NULL);
+			return 1;
 		}
 
 		if (PtInRect(&m_rcMaxButton, pt)) {
@@ -77,7 +90,7 @@ LRESULT CCaptionPainter::WindowProc(UINT msg, WPARAM wp, LPARAM lp)
 			else {
 				ShowWindow(wnd.m_hWnd, SW_MAXIMIZE);
 			}
-			return 0;
+			return 1;
 		}
 
 
@@ -639,3 +652,4 @@ CString  CCaptionPainter::GetDocTitle()
 	}
 	return s;
 }
+

@@ -4,8 +4,10 @@
 #include "stdafx.h"
 #include "ClientWnd.h"
 
-
 // CClientWnd
+/// <summary>
+///    Client Window for MDI Frame. Support erase backgrownd to custom color 
+/// </summary>
 
 IMPLEMENT_DYNAMIC(CClientWnd, CWnd)
 CClientWnd::CClientWnd()
@@ -15,7 +17,6 @@ CClientWnd::CClientWnd()
 CClientWnd::~CClientWnd()
 {
 }
-
 
 BEGIN_MESSAGE_MAP(CClientWnd, CWnd)
    ON_WM_ERASEBKGND()

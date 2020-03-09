@@ -4,6 +4,8 @@
 // If not, I don't know who wrote it.
 //
 // CSubclassWnd is a generic class for hooking another window's messages.
+//
+ 
 
 #include "StdAfx.h"
 #include "Subclass.h"
@@ -65,14 +67,15 @@ BOOL CSubclassWnd::HookWindow(CWnd* pWnd)
 		HWND hwnd = pWnd->m_hWnd;
 		ASSERT(hwnd && ::IsWindow(hwnd));
 		theHookMap.Add(hwnd, this);			// Add to map of hooks
-
+	    m_pWndHooked = pWnd;
 	} else {
 		// Unhook the window
 		ASSERT(m_pWndHooked!=NULL);
 		theHookMap.Remove(this);				// Remove from map
 		m_pOldWndProc = NULL;
+		m_pWndHooked = NULL;
 	}
-	m_pWndHooked = pWnd;
+
 	return TRUE;
 }
 
@@ -142,7 +145,14 @@ HookWndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
 
 	} else {
 		// pass to msg hook
-		lr = pSubclassWnd->WindowProc(msg, wp, lp);
+
+		if ((pSubclassWnd->m_pOldWndProc != NULL ) && 
+		(IsWindow(pSubclassWnd->m_pWndHooked->m_hWnd))) {
+			lr = pSubclassWnd->WindowProc(msg, wp, lp);
+		}
+		else {
+			lr = 1;
+		}
 	}
 	curMsg = oldMsg;			// pop state
 	return lr;

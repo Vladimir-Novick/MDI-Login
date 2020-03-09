@@ -1,8 +1,8 @@
 #pragma once
 
-
-// CClientWnd
-
+/// <summary>
+///   Client Window for MDI Frame. Support erase backgrownd to custom color 
+/// </summary>
 class CClientWnd : public CWnd
 {
 	DECLARE_DYNAMIC(CClientWnd)

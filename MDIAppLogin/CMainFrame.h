@@ -42,7 +42,7 @@ protected:  // control bar embedded members
 	virtual void OnUpdateFrameTitle(BOOL bAddToTitle);
 	LRESULT OnPaintMyCaption(WPARAM wp, LPARAM lp);
 	// caption bar member and message handler
-	CCaptionPainter m_capp;
+	CCaptionPainter *m_capp;
 
 #pragma endregion
 

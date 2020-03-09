@@ -22,23 +22,23 @@
     <ClCompile Include="StdAfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CDialogAbout.cpp">
-      <Filter>ModalDialogs</Filter>
-    </ClCompile>
     <ClCompile Include="CLoginDialog.cpp">
-      <Filter>ModalDialogs</Filter>
+      <Filter>LoginDialogs</Filter>
     </ClCompile>
     <ClCompile Include="CBaseLoginDialog.cpp">
-      <Filter>ModalDialogs</Filter>
+      <Filter>LoginDialogs</Filter>
     </ClCompile>
     <ClCompile Include="ClientWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Subclass.cpp">
-      <Filter>Source Files\CapTitle</Filter>
+      <Filter>Source Files\CapFrameTitle</Filter>
     </ClCompile>
     <ClCompile Include="PaintCap.cpp">
-      <Filter>Source Files\CapTitle</Filter>
+      <Filter>Source Files\CapFrameTitle</Filter>
+    </ClCompile>
+    <ClCompile Include="CDialogAbout.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,23 +66,23 @@
     <ClInclude Include="StdAfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CDialogAbout.h">
-      <Filter>ModalDialogs</Filter>
-    </ClInclude>
     <ClInclude Include="CLoginDialog.h">
-      <Filter>ModalDialogs</Filter>
+      <Filter>LoginDialogs</Filter>
     </ClInclude>
     <ClInclude Include="CBaseDialog.h">
-      <Filter>ModalDialogs</Filter>
+      <Filter>LoginDialogs</Filter>
     </ClInclude>
     <ClInclude Include="ClientWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Subclass.h">
-      <Filter>Header Files\CapTitle</Filter>
+      <Filter>Header Files\CapFrameTitle</Filter>
     </ClInclude>
     <ClInclude Include="PaintCap.h">
-      <Filter>Header Files\CapTitle</Filter>
+      <Filter>Header Files\CapFrameTitle</Filter>
+    </ClInclude>
+    <ClInclude Include="CDialogAbout.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -98,9 +98,6 @@
     <Image Include="..\images\screen.png" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="ModalDialogs">
-      <UniqueIdentifier>{11062aae-5dd9-491c-b037-2b141670a5da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{e3c250bd-a25d-4bc3-8607-ac75099347a8}</UniqueIdentifier>
     </Filter>
@@ -110,11 +107,14 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{7407d18d-9aec-49e7-b297-22a4d30ae360}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\CapTitle">
+    <Filter Include="Source Files\CapFrameTitle">
       <UniqueIdentifier>{8a15e295-cde2-4c1c-a3a8-0b597588fa88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\CapTitle">
+    <Filter Include="Header Files\CapFrameTitle">
       <UniqueIdentifier>{a5eda128-09b2-4547-9d5b-8aa16f267323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LoginDialogs">
+      <UniqueIdentifier>{11062aae-5dd9-491c-b037-2b141670a5da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

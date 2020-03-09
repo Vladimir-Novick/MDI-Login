@@ -89,6 +89,7 @@ public:
 	void UpdateFrameTitle(HWND m_hWnd,CString m_strTitle);
 	CString GetDocTitle();
 	void DrawNormalCaption(const PAINTCAP& pc);
+	void Uninstall();
 };
 
 #endif

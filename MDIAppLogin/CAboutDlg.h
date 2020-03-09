@@ -2,11 +2,12 @@
 
 #include "stdafx.h"
 #include "resource.h"
+#include "CDesignDialog.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
 
-class CAboutDlg : public CDialog
+class CAboutDlg : public CDesignDialog
 {
 public:
 	CAboutDlg();
