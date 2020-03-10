@@ -173,7 +173,7 @@ void CMainFrame::OnClose()
 	}
 	else {
 		
-		if (AfxMessageBox("Are you Sure to quit?", MB_YESNO | MB_ICONQUESTION) == IDYES)
+		if (AfxMessageBox(L"Are you Sure to quit?", MB_YESNO | MB_ICONQUESTION) == IDYES)
 		{
 			m_capp->Uninstall();
 			delete m_capp;

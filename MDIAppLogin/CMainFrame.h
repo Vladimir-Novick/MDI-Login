@@ -40,7 +40,7 @@ protected:  // control bar embedded members
 #pragma region updateTitle ---
 
 	virtual void OnUpdateFrameTitle(BOOL bAddToTitle);
-	LRESULT OnPaintMyCaption(WPARAM wp, LPARAM lp);
+	afx_msg LRESULT OnPaintMyCaption(WPARAM wp, LPARAM lp);
 	// caption bar member and message handler
 	CCaptionPainter *m_capp;
 
