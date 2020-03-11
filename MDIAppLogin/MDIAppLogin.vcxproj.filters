@@ -28,9 +28,6 @@
     <ClCompile Include="CBaseLoginDialog.cpp">
       <Filter>LoginDialogs</Filter>
     </ClCompile>
-    <ClCompile Include="ClientWnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CDialogAbout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -66,9 +63,6 @@
     <ClInclude Include="CBaseDialog.h">
       <Filter>LoginDialogs</Filter>
     </ClInclude>
-    <ClInclude Include="ClientWnd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CDialogAbout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -83,7 +77,6 @@
     <Image Include="res\Toolbar.bmp">
       <Filter>Resource</Filter>
     </Image>
-    <Image Include="..\images\screen.png" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource">
@@ -108,8 +101,5 @@
     <CustomBuild Include="res\MDIAppView.rc2">
       <Filter>Resource</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

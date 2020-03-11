@@ -9,6 +9,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NDC", "..\NDC\NDC.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest_NDC", "..\UnitTest_NDC\UnitTest_NDC.vcxproj", "{D28DBE87-329D-48A1-A924-3E971B0C15FD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{A5CE21B9-64E0-4335-B0D8-72FE1A39999C}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+		..\images\screen.png = ..\images\screen.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

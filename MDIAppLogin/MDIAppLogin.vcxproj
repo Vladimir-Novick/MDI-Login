@@ -140,7 +140,6 @@
     <ClCompile Include="CBaseLoginDialog.cpp" />
     <ClCompile Include="CChildFrame.cpp" />
     <ClCompile Include="CDialogAbout.cpp" />
-    <ClCompile Include="ClientWnd.cpp" />
     <ClCompile Include="CLoginDialog.cpp" />
     <ClCompile Include="CMainFrame.cpp" />
     <ClCompile Include="MDIAppView.cpp" />
@@ -161,7 +160,6 @@
     <ClInclude Include="CBaseDialog.h" />
     <ClInclude Include="CChildFrame.h" />
     <ClInclude Include="CDialogAbout.h" />
-    <ClInclude Include="ClientWnd.h" />
     <ClInclude Include="CLoginDialog.h" />
     <ClInclude Include="CMainFrame.h" />
     <ClInclude Include="MDIAppView.h" />
@@ -171,16 +169,12 @@
     <ClInclude Include="StdAfx.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\images\screen.png" />
     <Image Include="res\MDIAppView.ico" />
     <Image Include="res\MDIAppViewDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="res\MDIAppView.rc2" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NDC\NDC.vcxproj">

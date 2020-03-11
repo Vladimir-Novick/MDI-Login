@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CDesignDialog.h" />
+    <ClInclude Include="ClientWnd.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="PaintCap.h" />
     <ClInclude Include="StdAfx.h" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CDesignDialog.cpp" />
+    <ClCompile Include="ClientWnd.cpp" />
     <ClCompile Include="PaintCap.cpp" />
     <ClCompile Include="StdAfx.cpp" />
     <ClCompile Include="Subclass.cpp" />
