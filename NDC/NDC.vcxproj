@@ -155,20 +155,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CDesignDialog.h" />
+    <ClInclude Include="CDialogProperty.h" />
     <ClInclude Include="ClientWnd.h" />
+    <ClInclude Include="CSerializable.h" />
+    <ClInclude Include="CSerializableBase.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="PaintCap.h" />
+    <ClInclude Include="Property.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="Subclass.h" />
-    <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CDesignDialog.cpp" />
+    <ClCompile Include="CDialogProperty.cpp" />
     <ClCompile Include="ClientWnd.cpp" />
+    <ClCompile Include="CSerializable.cpp" />
+    <ClCompile Include="CSerializableBase.cpp" />
     <ClCompile Include="PaintCap.cpp" />
+    <ClCompile Include="Property.cpp" />
     <ClCompile Include="StdAfx.cpp" />
     <ClCompile Include="Subclass.cpp" />
-    <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

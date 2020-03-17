@@ -4,6 +4,9 @@
 #include "resource.h"
 #include "CDesignDialog.h"
 
+
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
 

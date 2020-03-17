@@ -5,6 +5,7 @@
 #include "PaintCap.h"
 
 
+
 class CMainFrame : public CMDIFrameWnd
 {
 	DECLARE_DYNAMIC(CMainFrame)

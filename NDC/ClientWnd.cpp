@@ -27,7 +27,7 @@ BOOL CClientWnd::OnEraseBkgnd(CDC* pDC)
 {
    CRect Rect;
    GetClientRect(&Rect);
-   pDC->FillSolidRect(&Rect,RGB(168, 178, 198));
+   pDC->FillSolidRect(&Rect,RGB(168, 178, 198)); // A8B2C6
 
    return TRUE;
 }
