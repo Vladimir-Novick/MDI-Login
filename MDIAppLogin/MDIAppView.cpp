@@ -57,7 +57,12 @@ CMDIAppViewApp theApp;
 
 BOOL CMDIAppViewApp::InitInstance()
 {
+
+	hResourceDLL = LoadLibrary(L"ResourceDLL.Dll");
+	AfxSetResourceHandle(hResourceDLL);
+
 	AfxEnableControlContainer();
+
 
 	// Standard initialization
 	// If you are not using these features and wish to reduce the size
@@ -110,3 +115,21 @@ void CMDIAppViewApp::OnAppAbout()
 /////////////////////////////////////////////////////////////////////////////
 // CMDIAppViewApp message handlers
 
+
+
+HINSTANCE CMDIAppViewApp::LoadAppLangResourceDLL()
+{
+	// TODO: Add your specialized code here and/or call the base class
+
+	return CWinApp::LoadAppLangResourceDLL();
+}
+
+
+int CMDIAppViewApp::ExitInstance()
+{
+	AfxSetResourceHandle(AfxGetApp()->m_hInstance); // Restores the EXE as the resource container.
+	FreeLibrary(hResourceDLL);
+	hResourceDLL = NULL;
+
+	return CWinApp::ExitInstance();
+}

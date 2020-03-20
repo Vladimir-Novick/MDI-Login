@@ -51,9 +51,6 @@
     <ClInclude Include="MDIAppViewView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StdAfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -68,17 +65,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\MDIAppView.ico">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="res\MDIAppViewDoc.ico">
-      <Filter>Resource</Filter>
-    </Image>
-    <Image Include="res\Toolbar.bmp">
-      <Filter>Resource</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Resource">
       <UniqueIdentifier>{e3c250bd-a25d-4bc3-8607-ac75099347a8}</UniqueIdentifier>
     </Filter>
@@ -91,15 +77,5 @@
     <Filter Include="LoginDialogs">
       <UniqueIdentifier>{11062aae-5dd9-491c-b037-2b141670a5da}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="MDIAppView.rc">
-      <Filter>Resource</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="res\MDIAppView.rc2">
-      <Filter>Resource</Filter>
-    </CustomBuild>
   </ItemGroup>
 </Project>

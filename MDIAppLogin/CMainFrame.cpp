@@ -53,10 +53,12 @@ CMainFrame::CMainFrame()
 {
 	// TODO: add member initialization code here
 	NotLoginExit = false;
+	
 }
 
 CMainFrame::~CMainFrame()
 {
+
 }
 
 #pragma region updateTitle ---

@@ -31,5 +31,16 @@ public:
 	virtual ~CDesignDialog();
 	DECLARE_MESSAGE_MAP()
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	virtual BOOL OnInitDialog();
+
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CDesignDialog)
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	//}}AFX_VIRTUAL
+
+	static BOOL __stdcall  ModifyChildFont(HWND hwnd, LPARAM);
+	virtual LRESULT DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 };
 

@@ -55,4 +55,50 @@ Using:
       CModalDialog to CModalDesignDialog
 
          include: CDesignDialog.h
+
+##  Create Resource DLLs and Language Support
   
+### Create Satellite DLL ( resource-only DLL )
+
+1) Create Empty Dynamic Link Library project with Windows Desktop Wizard.
+
+2) Create a new resource ( .rc file )
+
+3) Specify the /NOENTRY linker option. ( Project Properties -> Linker -> Advanced -> No Entry Point -> Select Yes option )
+
+### Use a Satellite DLL
+
+1) set all application resource into Satellite DLL
+
+2) Load satellite DLL into your application initialization:
+
+for example:
+
+            //////////////////////////////////////////////
+            // CMDIAppViewApp initialization
+
+            BOOL CMDIAppViewApp::InitInstance()
+            {
+
+	            hResourceDLL = LoadLibrary(L"ResourceDLL.Dll");
+	            AfxSetResourceHandle(hResourceDLL);
+
+	            AfxEnableControlContainer();
+                ....
+
+You can select resources DLL file depending on your application configuration
+
+3) Unload your sattelite DLL
+
+for example:
+
+            int CMDIAppViewApp::ExitInstance()
+            {
+                // Restores the EXE as the resource container.
+                //
+	            AfxSetResourceHandle(AfxGetApp()->m_hInstance); 
+	            FreeLibrary(hResourceDLL);
+	            hResourceDLL = NULL;
+
+	            return CWinApp::ExitInstance();
+            }

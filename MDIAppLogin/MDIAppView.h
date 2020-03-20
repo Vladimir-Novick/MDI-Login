@@ -17,6 +17,7 @@ class CMDIAppViewApp : public CWinApp
 {
 public:
 	CMDIAppViewApp();
+	HINSTANCE hResourceDLL;
 
 // Overrides
 	// ClassWizard generated virtual function overrides
@@ -32,6 +33,8 @@ public:
 		//    DO NOT EDIT what you see in these blocks of generated code !
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+	virtual HINSTANCE LoadAppLangResourceDLL();
+	virtual int ExitInstance();
 };
 
 

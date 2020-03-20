@@ -18,7 +18,7 @@ IMPLEMENT_DYNCREATE(CLoginDialog, CWinThread)
 BOOL CLoginDialog::InitInstance()
 {
     CLoginDlg dlg;
-	dlg.SetWaitTime(15); // Set Waiting time - Seconds
+	dlg.SetWaitTime(30); // Set Waiting time - Seconds
     int ret =  dlg.DoModal();
 
 	if (ret != 1) {

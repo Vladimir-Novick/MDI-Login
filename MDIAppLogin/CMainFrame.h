@@ -34,6 +34,7 @@ public:
 #endif
 
 protected:  // control bar embedded members
+
 	CStatusBar  m_wndStatusBar;
 	CToolBar    m_wndToolBar;
 	CClientWnd  m_Client; // Custom frame color
