@@ -56,7 +56,7 @@ Using:
 
          include: CDesignDialog.h
 
-##  Create Resource DLLs and Language Support
+#  Create Resource DLLs and Language Support
   
 ### Create Satellite DLL ( resource-only DLL )
 
