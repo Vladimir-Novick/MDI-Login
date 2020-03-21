@@ -162,12 +162,24 @@
     <ClInclude Include="MDIAppView.h" />
     <ClInclude Include="MDIAppViewDoc.h" />
     <ClInclude Include="MDIAppViewView.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="StdAfx.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NDC\NDC.vcxproj">
       <Project>{ae04b5d1-b0ca-40a2-8758-91344843b09c}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MDIAppView.ico" />
+    <Image Include="res\MDIAppViewDoc.ico" />
+    <Image Include="res\Toolbar.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Resource.rc2" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

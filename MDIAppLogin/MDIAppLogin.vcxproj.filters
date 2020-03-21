@@ -63,6 +63,9 @@
     <ClInclude Include="CDialogAbout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource">
@@ -77,5 +80,26 @@
     <Filter Include="LoginDialogs">
       <UniqueIdentifier>{11062aae-5dd9-491c-b037-2b141670a5da}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\MDIAppView.ico">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="res\MDIAppViewDoc.ico">
+      <Filter>Resource</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Resource.rc2">
+      <Filter>Resource</Filter>
+    </None>
   </ItemGroup>
 </Project>

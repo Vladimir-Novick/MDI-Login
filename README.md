@@ -62,15 +62,19 @@ Using:
 
 1) Create Empty Dynamic Link Library project with Windows Desktop Wizard.
 
-2) Create a new resource ( .rc file )
+2) Create a new resource ( .rc file ).
 
-3) Specify the /NOENTRY linker option. ( Project Properties -> Linker -> Advanced -> No Entry Point -> Select Yes option )
+3) copy all application resource and file resource.h into Satellite DLL.
+
+4) Modify your application resource as your needs.
+
+5) Specify the /NOENTRY linker option. ( Project Properties -> Linker -> Advanced -> No Entry Point -> Select Yes option )
+
+6) Create Satellite DLL for all your application configuration 
 
 ### Use a Satellite DLL
 
-1) set all application resource into Satellite DLL
-
-2) Load satellite DLL into your application initialization:
+Load satellite DLL into your application initialization:
 
 for example:
 
