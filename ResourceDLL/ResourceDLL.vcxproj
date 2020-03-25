@@ -151,6 +151,8 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\icon1.ico" />
     <Image Include="res\MDIAppView.ico" />
     <Image Include="res\MDIAppViewDoc.ico" />
     <Image Include="res\Toolbar.bmp" />

@@ -28,18 +28,21 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 BEGIN_MESSAGE_MAP(CMDIAppViewApp, CWinApp)
 	//{{AFX_MSG_MAP(CMDIAppViewApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
+
 		// NOTE - the ClassWizard will add and remove mapping macros here.
 		//    DO NOT EDIT what you see in these blocks of generated code!
 	//}}AFX_MSG_MAP
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
+
 	// Standard print setup command
 	ON_COMMAND(ID_FILE_PRINT_SETUP, CWinApp::OnFilePrintSetup)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CMDIAppViewApp construction
+
 
 CMDIAppViewApp::CMDIAppViewApp()
 {
@@ -57,8 +60,12 @@ CMDIAppViewApp theApp;
 
 BOOL CMDIAppViewApp::InitInstance()
 {
-
+	// Load Resource file
 	hResourceDLL = LoadLibrary(L"ResourceDLL.Dll");
+	if (hResourceDLL == NULL) {
+		::AfxMessageBox(L"Invalid Resource File", MB_ICONSTOP | MB_OK);
+		exit(-1);
+	}
 	AfxSetResourceHandle(hResourceDLL);
 
 	AfxEnableControlContainer();

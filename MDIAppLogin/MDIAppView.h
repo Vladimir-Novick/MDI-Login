@@ -15,13 +15,17 @@
 
 class CMDIAppViewApp : public CWinApp
 {
+
 public:
 	CMDIAppViewApp();
 	HINSTANCE hResourceDLL;
 
+
+
 // Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CMDIAppViewApp)
+
 	public:
 	virtual BOOL InitInstance();
 	//}}AFX_VIRTUAL

@@ -4,7 +4,8 @@
 #include "ClientWnd.h"
 #include "PaintCap.h"
 
-
+#define COLORREF2RGB(Color) (Color & 0xff00) | ((Color >> 16) & 0xff) \
+                                 | ((Color << 16) & 0xff0000)
 
 class CMainFrame : public CMDIFrameWnd
 {
@@ -38,6 +39,7 @@ protected:  // control bar embedded members
 	CStatusBar  m_wndStatusBar;
 	CToolBar    m_wndToolBar;
 	CClientWnd  m_Client; // Custom frame color
+	HBITMAP hBitmapAbout;
 
 #pragma region updateTitle ---
 
@@ -60,6 +62,9 @@ public:
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 	afx_msg void OnClose();
 	virtual BOOL OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext);
+	afx_msg void OnInitMenuPopup(CMenu* pPopupMenu, UINT nIndex, BOOL bSysMenu);
+//	afx_msg void OnMeasureItem(int nIDCtl, LPMEASUREITEMSTRUCT lpMeasureItemStruct);
+	HBITMAP  ReplaceColor(HBITMAP hBmp, COLORREF cOldColor, COLORREF cNewColor, HDC hBmpDC = NULL);
 };
 
 /////////////////////////////////////////////////////////////////////////////

@@ -1,11 +1,12 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by MDIAppView.rc
+// Used by Resource.rc
 //
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
 #define IDR_MYMDIATYPE                  129
 #define IDD_DIALOG_LOGIN                131
+#define IDB_BITMAP1                     134
 #define IDC_EDIT2                       1001
 #define IDC_EDIT3                       1002
 
@@ -14,7 +15,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        133
+#define _APS_NEXT_RESOURCE_VALUE        135
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

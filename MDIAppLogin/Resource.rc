@@ -77,6 +77,7 @@ IDR_MYMDIATYPE          ICON                    "res\\MDIAppViewDoc.ico"
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
+ID_APP_ABOUT   BITMAP   DISCARDABLE    "res\\bitmap1.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
