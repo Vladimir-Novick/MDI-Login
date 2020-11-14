@@ -31,3 +31,14 @@ BOOL CClientWnd::OnEraseBkgnd(CDC* pDC)
 
    return TRUE;
 }
+
+
+CFont* CMainFrameInterface::GetAppDefaultFont() {
+    return AppDefaultFont;
+}
+
+void CMainFrameInterface::SetAppDefaultFont(CFont* font) {
+    AppDefaultFont = font;
+}
+
+CFont* CMainFrameInterface::AppDefaultFont;

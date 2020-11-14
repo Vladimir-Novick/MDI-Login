@@ -96,6 +96,7 @@
     <Image Include="res\Toolbar.bmp">
       <Filter>Resource</Filter>
     </Image>
+    <Image Include="res\bitmap1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Resource.rc2">

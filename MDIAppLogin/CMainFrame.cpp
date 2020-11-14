@@ -336,3 +336,7 @@ HBITMAP  CMainFrame::ReplaceColor(HBITMAP hBmp, COLORREF cOldColor, COLORREF cNe
 	}
 	return RetBmp;
 }
+
+
+
+

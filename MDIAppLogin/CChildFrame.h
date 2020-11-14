@@ -26,6 +26,7 @@ public:
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
+	virtual BOOL OnEraseBkgnd(CDC* pDC);
 #endif
 
 // Generated message map functions

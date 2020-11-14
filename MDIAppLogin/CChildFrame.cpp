@@ -59,6 +59,16 @@ BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 
 
 
+BOOL CChildFrame::OnEraseBkgnd(CDC* pDC)
+{
+	CRect Rect;
+	GetClientRect(&Rect);
+	pDC->FillSolidRect(&Rect, RGB(168, 178, 198));
+
+	return TRUE;
+}
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CChildFrame diagnostics
 

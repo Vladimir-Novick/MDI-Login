@@ -16,4 +16,11 @@ protected:
 	DECLARE_MESSAGE_MAP()
 };
 
+class CMainFrameInterface {
+protected:
+	static CFont* AppDefaultFont;
+public:
+	static CFont* GetAppDefaultFont();
+	static void SetAppDefaultFont(CFont* font);
+};
 
